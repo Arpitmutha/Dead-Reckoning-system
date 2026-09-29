@@ -1,0 +1,381 @@
+/* ─── Google Fonts ────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Design Tokens ───────────────────────────────────────────────────────── */
+@theme {
+  --color-bg-primary: #0a0e1a;
+  --color-bg-card: #0f172a;
+  --color-bg-card-hover: #1e293b;
+  --color-border: rgba(56, 189, 248, 0.12);
+  --color-border-active: rgba(56, 189, 248, 0.35);
+
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  --color-status-green: #22c55e;
+  --color-status-yellow: #eab308;
+  --color-status-red: #ef4444;
+  --color-status-blue: #38bdf8;
+  --color-status-cyan: #06b6d4;
+  --color-status-purple: #a78bfa;
+
+  --color-gps-route: #22c55e;
+  --color-dr-route: #38bdf8;
+  --color-ai-route: #06b6d4;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ─── Global Styles ───────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.4);
+}
+
+/* ─── Glassmorphism Card ──────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--color-border-active);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.06);
+}
+
+/* ─── Status Indicators ──────────────────────────────────────────────────── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.status-dot.green {
+  background: var(--color-status-green);
+  box-shadow: 0 0 8px var(--color-status-green);
+}
+.status-dot.green::after {
+  border: 2px solid var(--color-status-green);
+}
+
+.status-dot.yellow {
+  background: var(--color-status-yellow);
+  box-shadow: 0 0 8px var(--color-status-yellow);
+}
+.status-dot.yellow::after {
+  border: 2px solid var(--color-status-yellow);
+}
+
+.status-dot.red {
+  background: var(--color-status-red);
+  box-shadow: 0 0 8px var(--color-status-red);
+  animation: blink 1s ease-in-out infinite;
+}
+.status-dot.red::after {
+  border: 2px solid var(--color-status-red);
+}
+
+.status-dot.blue {
+  background: var(--color-status-blue);
+  box-shadow: 0 0 8px var(--color-status-blue);
+}
+.status-dot.blue::after {
+  border: 2px solid var(--color-status-blue);
+}
+
+/* ─── Alert Banners ──────────────────────────────────────────────────────── */
+.alert-banner {
+  animation: slideDown 0.4s ease-out;
+}
+
+.alert-banner-warning {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(239, 68, 68, 0.15));
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.alert-banner-success {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+}
+
+@keyframes dataFlow {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.data-flow-line {
+  background: linear-gradient(90deg, transparent, var(--color-status-blue), transparent);
+  background-size: 200% 100%;
+  animation: dataFlow 2s linear infinite;
+}
+
+/* ─── Leaflet Overrides ──────────────────────────────────────────────────── */
+.leaflet-container {
+  background: #0a0e1a !important;
+  border-radius: 12px;
+}
+
+.leaflet-control-zoom a {
+  background: rgba(15, 23, 42, 0.9) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(15, 23, 42, 0.8) !important;
+  color: var(--color-text-muted) !important;
+  font-size: 10px !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-status-blue) !important;
+}
+
+/* Vehicle marker */
+.vehicle-marker {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.vehicle-marker::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.15);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ─── Recharts Overrides ─────────────────────────────────────────────────── */
+.recharts-cartesian-grid-bg {
+  fill: rgba(15, 23, 42, 0.5);
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────── */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #06b6d4, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #991b1b, #dc2626);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #065f46, #059669);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #047857, #10b981);
+  box-shadow: 0 0 15px rgba(5, 150, 105, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.btn-secondary:hover {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: var(--color-border-active);
+}
+
+.btn-demo {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-demo:hover {
+  background: linear-gradient(135deg, #8b5cf6, #c4b5fd);
+  box-shadow: 0 0 25px rgba(167, 139, 250, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ─── Progress Steps ─────────────────────────────────────────────────────── */
+.progress-step {
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  color: var(--color-status-blue);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.progress-step.completed {
+  color: var(--color-status-green);
+}
